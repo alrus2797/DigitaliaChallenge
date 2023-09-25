@@ -14,6 +14,9 @@ public class LookupDto
         {
             CreateMap<TodoList, LookupDto>();
             CreateMap<TodoItem, LookupDto>();
+            CreateMap<Poll, LookupDto>();
+            CreateMap<PollChoice, LookupDto>();
+            CreateMap<Vote, LookupDto>();
         }
     }
 }

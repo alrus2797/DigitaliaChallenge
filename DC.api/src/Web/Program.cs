@@ -23,6 +23,8 @@ else
     app.UseHsts();
 }
 
+app.UseCors();
+
 app.UseHealthChecks("/health");
 app.UseHttpsRedirection();
 app.UseStaticFiles();
@@ -49,4 +51,5 @@ app.MapEndpoints();
 
 app.Run();
 
-public partial class Program { }
+public partial class Program {
+ }

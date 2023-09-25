@@ -40,14 +40,26 @@ public static class DependencyInjection
             options.SuppressModelStateInvalidFilter = true);
 
         services.AddEndpointsApiExplorer();
-        services.AddCors();
+        services.AddCors(options =>
+        {
+            options.AddDefaultPolicy(
+                builder =>
+                {
+                    builder
+                    .AllowAnyMethod()
+                    .AllowAnyHeader()
+                    .SetIsOriginAllowed(origin => true) // = any origin
+                    .AllowCredentials();
+                });
+        }
+        );
 
         services.AddOpenApiDocument((configure, sp) =>
         {
             configure.Title = "DC.api API";
 
             // Add the fluent validations schema processor
-            var fluentValidationSchemaProcessor = 
+            var fluentValidationSchemaProcessor =
                 sp.CreateScope().ServiceProvider.GetRequiredService<FluentValidationSchemaProcessor>();
 
             configure.SchemaProcessors.Add(fluentValidationSchemaProcessor);
