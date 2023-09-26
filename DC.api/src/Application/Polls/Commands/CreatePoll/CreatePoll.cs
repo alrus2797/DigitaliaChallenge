@@ -60,10 +60,10 @@ public class CreatePollCommandHandler : IRequestHandler<CreatePollCommand, PollD
         };
 
         _context.Polls.Add(_poll);
+        await _context.SaveChangesAsync(cancellationToken);
 
         var choices = request.PollChoices.Select(choice => new PollChoice
         {
-            
             Title = choice.Title,
             Description = choice.Description,
             NumberOfVotes = 0,

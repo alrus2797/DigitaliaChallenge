@@ -1,7 +1,7 @@
 import { PollChoice } from "./PollChoice";
 
 export interface Poll {
-  id: string;
+  id?: string;
   title: string;
   description: string;
   endDate: Date;

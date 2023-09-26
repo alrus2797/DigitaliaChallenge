@@ -3,10 +3,20 @@ import ReactDOM from 'react-dom/client';
 import reportWebVitals from './reportWebVitals';
 import { routes } from './routes';
 import { RouterProvider } from 'react-router-dom';
-
+import axios from 'axios'
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { AuthProvider } from './hooks/useAuth';
 
+axios.interceptors.response.use(function (response) {
+  return response;
+}, function (error) {
+  if (error.response.status === 401) {
+    localStorage.removeItem('user');
+    window.location.href = '/login';
+  }
+
+
+  return Promise.reject(error);
+});
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement

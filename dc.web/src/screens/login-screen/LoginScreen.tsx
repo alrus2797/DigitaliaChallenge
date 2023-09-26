@@ -26,7 +26,7 @@ export const LoginScreen = () => {
       if (response.status === 200) {
         let { access_token } = response.data;
         const userInfoResponse = await getUserInfo(access_token);
-        const userInfo = { ...userInfoResponse.data, access_token };
+        const userInfo = { ...userInfoResponse.data, accessToken: access_token };
         console.log(userInfo);
         saveUser(userInfo);
       } else if (response.status === 401) {

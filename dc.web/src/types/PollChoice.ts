@@ -1,5 +1,5 @@
 export interface PollChoice {
-  id: string;
+  id?: string;
   title: string;
   description?: string;
   numberOfVotes?: number;

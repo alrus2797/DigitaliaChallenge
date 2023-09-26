@@ -1,4 +1,4 @@
-import { PropsWithChildren } from "react";
+import { PropsWithChildren, ReactElement } from "react";
 import { Navigate } from "react-router-dom";
 import { useAuth } from "../../hooks/useAuth";
 
@@ -7,6 +7,6 @@ export const ProtectedRoute = ({ children }: PropsWithChildren) => {
   if (!user) {
     return <Navigate to="/" />;
   }
-  return children;
+  return children as ReactElement;
 
 }
