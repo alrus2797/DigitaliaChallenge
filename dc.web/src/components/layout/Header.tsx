@@ -28,9 +28,9 @@ export const Header = () => {
             className="justify-content-end"
           >
             <Nav className="mr-auto">
-              <LinkContainer to="/cart">
+              <LinkContainer to="/finished-polls">
                 <Nav.Link>
-                  <i className="fas fa-shopping-cart"></i> Cart
+                  Finished Polls
                 </Nav.Link>
               </LinkContainer>
               {user ? (

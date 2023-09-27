@@ -6,16 +6,16 @@ import React from "react";
 import { useLoaderData } from "react-router-dom";
 import { Row } from "react-bootstrap";
 import { Poll } from "../../types";
-import { FuturePolls } from "./future-polls";
+import { ClosedPolls } from "./closed-polls";
 
-export const HomeScreen = () => {
+export const ClosedPollsScreen = () => {
   const { polls } = useLoaderData() as { polls: Poll[] };
 
   return (
     <>
-      <h1>Latest Open Polls</h1>
+      <h1>Closed Polls</h1>
       <Row>
-        <FuturePolls polls={polls} />
+        <ClosedPolls polls={polls} />
       </Row>
     </>
   );

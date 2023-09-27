@@ -4,8 +4,8 @@ import { getPoll, getPolls } from './services'
 import { Layout, ProtectedRoute } from './components/'
 import { DashboardScreen, HomeScreen, LoginScreen } from './screens'
 import { PollScreen } from './screens/poll-screen/PollScreen'
-import { useLocalStorage } from './hooks/useLocalStorage'
 import { getVotedChoice } from './services/votes'
+import { ClosedPollsScreen } from './screens/closed-polls-screen/ClosedPollsScreen'
 
 export const routes = createBrowserRouter([
   {
@@ -14,6 +14,14 @@ export const routes = createBrowserRouter([
       {
         path: '/',
         element: <HomeScreen />,
+        loader: async () =>  {
+          const polls = await getPolls()
+          return { polls }
+        },   
+      },
+      {
+        path: '/finished-polls',
+        element: <ClosedPollsScreen />,
         loader: async () =>  {
           const polls = await getPolls()
           return { polls }
