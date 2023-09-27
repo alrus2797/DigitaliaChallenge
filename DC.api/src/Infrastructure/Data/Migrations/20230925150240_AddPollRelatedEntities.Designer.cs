@@ -4,6 +4,7 @@ using DC.api.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DC.api.Infrastructure.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230925150240_AddPollRelatedEntities")]
+    partial class AddPollRelatedEntities
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -185,8 +188,8 @@ namespace DC.api.Infrastructure.Data.Migrations
                     b.Property<string>("Author")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("ChoiceId")
-                        .HasColumnType("int");
+                    b.Property<string>("Choice")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTimeOffset>("Created")
                         .HasColumnType("datetimeoffset");
@@ -204,8 +207,6 @@ namespace DC.api.Infrastructure.Data.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("ChoiceId");
 
                     b.HasIndex("PollId");
 
@@ -463,19 +464,11 @@ namespace DC.api.Infrastructure.Data.Migrations
 
             modelBuilder.Entity("DC.api.Domain.Entities.Vote", b =>
                 {
-                    b.HasOne("DC.api.Domain.Entities.PollChoice", "Choice")
-                        .WithMany("Votes")
-                        .HasForeignKey("ChoiceId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("DC.api.Domain.Entities.Poll", "Poll")
                         .WithMany("Votes")
                         .HasForeignKey("PollId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("Choice");
 
                     b.Navigation("Poll");
                 });
@@ -535,11 +528,6 @@ namespace DC.api.Infrastructure.Data.Migrations
                 {
                     b.Navigation("PollChoices");
 
-                    b.Navigation("Votes");
-                });
-
-            modelBuilder.Entity("DC.api.Domain.Entities.PollChoice", b =>
-                {
                     b.Navigation("Votes");
                 });
 
