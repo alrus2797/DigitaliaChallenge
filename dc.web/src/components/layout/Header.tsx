@@ -1,6 +1,3 @@
-// Create Header component that will be used by all pages
-
-import React from "react";
 import { LinkContainer } from "react-router-bootstrap";
 import { Navbar, Nav, Container, NavDropdown } from "react-bootstrap";
 import { useAuth } from "../../hooks/useAuth";
@@ -9,7 +6,9 @@ import { useLocalStorage } from "../../hooks/useLocalStorage";
 // import { logout } from '../../actions/userActions';
 
 export const Header = () => {
-  const { storedValue: guestName } = useLocalStorage<string>("guestName", null);
+  const { refreshValue } = useLocalStorage<string>("guestName", null);
+
+  const guestName = refreshValue();
 
   const { user, logout } = useAuth();
 

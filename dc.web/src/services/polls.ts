@@ -8,6 +8,11 @@ export const getPolls = async () => {
   return response.data;
 };
 
+export const getPoll = async (id: string) => {
+  const response = await axios.get<Poll>(`${baseUrl}/polls/${id}`);
+  return response.data;
+};
+
 export const createPoll = async (poll: Poll, accessToken: string) => {
   const response = await axios.post<Poll>(`${baseUrl}/polls`, poll, {
     headers: {
