@@ -23,3 +23,8 @@ export const getUserInfo = (access_token: string) => {
     }
   })
 }
+
+export const getIp = async () => {
+  const res = await axios.get<{ip: string}>("https://api.ipify.org/?format=json");
+  return res.data.ip;
+};
